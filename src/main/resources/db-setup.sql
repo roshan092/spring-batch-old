@@ -1,0 +1,3 @@
+CREATE ROLE spring_batch LOGIN ENCRYPTED
+PASSWORD 'md5c457cdf883fef615dda71afd2a59d644'
+VALID UNTIL 'infinity';

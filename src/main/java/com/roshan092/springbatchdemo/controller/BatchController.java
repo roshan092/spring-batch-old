@@ -27,13 +27,13 @@ public class BatchController {
     public BatchResponse startBatch() throws JobExecutionException {
         JobExecution execution;
         Set<JobExecution> runningJobExecutions = jobExplorer.findRunningJobExecutions("demoJob");
-        if (runningJobExecutions.size() != 0) {
-            execution = runningJobExecutions.stream().findFirst().get();
-        } else {
+//        if (runningJobExecutions.size() != 0) {
+//            execution = runningJobExecutions.stream().findFirst().get();
+//        } else {
             JobParametersBuilder builder = new JobParametersBuilder()
                     .addLong("time", clock.instant().getEpochSecond());
             execution = jobLauncher.run(this.demoJob, builder.toJobParameters());
-        }
+//        }
         StepExecution stepExecution = execution.getStepExecutions().stream().findFirst().orElse(null);
         return BatchResponse.builder().
                 jobExecutionId(execution.getId())

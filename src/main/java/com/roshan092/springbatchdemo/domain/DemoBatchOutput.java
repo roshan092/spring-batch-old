@@ -10,5 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DemoBatchOutput {
-    private String name;
+//    private String name;
+    private Integer id;
+    private Integer value;
 }

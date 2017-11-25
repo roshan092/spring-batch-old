@@ -1,0 +1,18 @@
+﻿SELECT job_execution_id, version, job_instance_id, create_time, start_time, end_time, status, exit_code, 
+exit_message, last_updated, job_configuration_location FROM batch_job_execution;
+
+SELECT job_execution_id, short_context, serialized_context FROM batch_job_execution_context;
+
+SELECT job_execution_id, type_cd, key_name, string_val, date_val, long_val, double_val, identifying
+FROM batch_job_execution_params;
+
+SELECT job_instance_id, version, job_name, job_key FROM batch_job_instance;
+
+SELECT step_execution_id, version, step_name, job_execution_id, start_time, end_time, status, commit_count, 
+read_count, filter_count, write_count, read_skip_count, write_skip_count, process_skip_count, rollback_count, 
+exit_code, exit_message, last_updated FROM batch_step_execution;
+
+SELECT step_execution_id, short_context, serialized_context FROM batch_step_execution_context;
+
+
+

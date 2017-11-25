@@ -88,9 +88,11 @@ public class DemoBatchConfiguration {
         System.out.println("FlatFileItemReader created ------------------->");
         FlatFileItemReader<DemoBatchInput> reader = new FlatFileItemReader<>();
         reader.setResource(new FileSystemResource("/home/roshan092/input/sample-data.csv"));
+        reader.setLinesToSkip(1);
         reader.setLineMapper(new DefaultLineMapper<DemoBatchInput>() {{
             setLineTokenizer(new DelimitedLineTokenizer() {{
-                setNames(new String[]{"firstName", "lastName"});
+//                setNames(new String[]{"firstName", "lastName"});
+                setNames(new String[]{"id"});
             }});
             setFieldSetMapper(new BeanWrapperFieldSetMapper<DemoBatchInput>() {{
                 setTargetType(DemoBatchInput.class);
@@ -106,13 +108,16 @@ public class DemoBatchConfiguration {
         long timeStamp = new Date().getTime();
         FlatFileItemWriter<DemoBatchOutput> writer = new FlatFileItemWriter<>();
         writer.setResource(new FileSystemResource("/home/roshan092/output/test-output" + timeStamp + ".csv"));
-        writer.setHeaderCallback(headerWriter -> headerWriter.write("Name(Upper Case)"));
+//        writer.setHeaderCallback(headerWriter -> headerWriter.write("Name(Upper Case)"));
+        writer.setHeaderCallback(
+                headerWriter -> headerWriter.write("id, value"));
+
         DelimitedLineAggregator<DemoBatchOutput> delLineAgg
                 = new DelimitedLineAggregator<>();
         delLineAgg.setDelimiter(",");
         BeanWrapperFieldExtractor<DemoBatchOutput> fieldExtractor
                 = new BeanWrapperFieldExtractor<>();
-        fieldExtractor.setNames(new String[]{"name"});
+        fieldExtractor.setNames(new String[]{"id", "value"});
         delLineAgg.setFieldExtractor(fieldExtractor);
         writer.setLineAggregator(delLineAgg);
         return writer;

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DemoBatchInput {
-    private String firstName;
-    private String lastName;
+    private Integer id;
+//    private String firstName;
+//    private String lastName;
 }
